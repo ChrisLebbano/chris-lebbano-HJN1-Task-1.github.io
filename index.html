@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Taniti Prototype</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f2f2;
+            color: #333;
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #ffffff;
+            border-right: 1px solid #ccc;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .logo-box {
+            border: 2px solid #999;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-btn,
+        .newsletter-btn {
+            padding: 10px 8px;
+            border-radius: 6px;
+            border: 2px solid #bbb;
+            background: #f8f8f8;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .nav-btn.active {
+            border-color: #4c7edb;
+            background: #ffffff;
+        }
+
+        .nav-btn:hover,
+        .newsletter-btn:hover {
+            background: #ededed;
+        }
+
+        .newsletter-btn {
+            margin-top: auto;
+        }
+
+        .main {
+            flex: 1;
+            padding: 20px 30px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #ffffff;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 30px;
+        }
+
+        .back-btn {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            border: 2px solid #666;
+            background: #f8f8f8;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+        }
+
+        .hero {
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .hero h1 {
+            display: inline-block;
+            border: 2px solid #000;
+            padding: 6px 12px;
+            font-size: 22px;
+            background: #fafafa;
+        }
+
+        .bg-image-placeholder {
+            border: 2px dashed #aaa;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #777;
+            margin-top: 8px;
+        }
+
+        .summary-box,
+        .content-box {
+            border-radius: 12px;
+            border: 2px solid #ccc;
+            padding: 10px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background: #fafafa;
+        }
+
+        .box-title {
+            font-size: 14px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .box-body {
+            font-size: 13px;
+            line-height: 1.4;
+            max-height: 110px;
+            overflow-y: auto;
+            padding-top: 4px;
+        }
+
+        .footer {
+            margin-top: auto;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            font-size: 12px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer span {
+            font-style: italic;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .newsletter-form label {
+            font-size: 13px;
+        }
+
+        .newsletter-form input[type="email"] {
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #bbb;
+        }
+
+        .newsletter-form button {
+            align-self: flex-start;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #777;
+            background: #e0e0e0;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .newsletter-form button:hover {
+            background: #d4d4d4;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <!-- Left sidebar -->
+    <aside class="sidebar">
+        <div class="logo-box">
+            Logo / Image of Taniti or Flag
+        </div>
+
+        <nav class="nav">
+            <button class="nav-btn active" data-section="about">About</button>
+            <button class="nav-btn" data-section="lodging">Lodging</button>
+            <button class="nav-btn" data-section="activities">Activities</button>
+            <button class="nav-btn" data-section="dining">Dining</button>
+            <button class="nav-btn" data-section="plan">Plan</button>
+        </nav>
+
+        <button class="newsletter-btn" data-section="newsletter">
+            Newsletter
+        </button>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="main">
+        <header class="top-bar">
+            <button class="back-btn" id="backBtn" title="Back to About">&#8592;</button>
+        </header>
+
+        <section class="hero">
+            <h1>Discover Taniti - Your Island Escape</h1>
+        </section>
+
+        <section class="bg-image-placeholder">
+            Background Image of Taniti
+        </section>
+
+        <section class="summary-box">
+            <h2 class="box-title">Summary</h2>
+            <div class="box-body" id="summaryBody">
+                Brief overview text about Taniti will appear here based on the section selected.
+            </div>
+        </section>
+
+        <section class="content-box">
+            <h2 class="box-title">Content</h2>
+            <div class="box-body" id="contentBody">
+                More detailed placeholder content for the selected section will show here. In this
+                wireframe, this area represents scrollable text related to the topic.
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>[Contact]</span>
+            <span>[Travel Advisories]</span>
+            <span>[Accessibility]</span>
+            <span>[Social Icons]</span>
+        </footer>
+    </main>
+</div>
+
+<script>
+    const sectionData = {
+        about: {
+            summary: "High-level summary of Taniti as a small tropical island destination.",
+            content:
+                "This area would describe Taniti's beaches, rainforest, volcano, and local culture. " +
+                "In a real site, this content would be longer and scrollable, explaining why visitors " +
+                "might choose Taniti for their vacation."
+        },
+        lodging: {
+            summary: "Overview of lodging options: hostels, family hotels, B&Bs, and the four-star resort.",
+            content:
+                "Here you might outline typical price ranges, types of accommodations, and any government " +
+                "regulation or safety standards. Users could later click from this section into specific " +
+                "property pages."
+        },
+        activities: {
+            summary: "Snapshot of key activities like beaches, rainforest hikes, volcano tours, and nightlife.",
+            content:
+                "This content box might list example activities such as snorkeling, zip-lining, guided hikes, " +
+                "museum visits, and nightlife in Merriton Landing. In the real design, each activity could link " +
+                "to more detailed information."
+        },
+        dining: {
+            summary: "Quick description of local restaurants and cuisines available on Taniti.",
+            content:
+                "Content here would mention the mix of local fish and rice dishes, American-style restaurants, " +
+                "and Pan-Asian cuisine. It might later expand into menus, opening hours, and reservation details."
+        },
+        plan: {
+            summary: "Planning helper: how to get to Taniti, local transportation, and practical tips.",
+            content:
+                "This section would emphasize flight options, the small airport, cruise ship schedule, " +
+                "bus and taxi information, and basic travel tips such as currency, power outlets, and " +
+                "holiday closures."
+        },
+        newsletter: {
+            summary: "Simple newsletter sign-up form for visitors who want updates about Taniti.",
+            content:
+                null // we'll build a small form in JS
+        }
+    };
+
+    const summaryBody = document.getElementById("summaryBody");
+    const contentBody = document.getElementById("contentBody");
+    const navButtons = document.querySelectorAll("[data-section]");
+    const backBtn = document.getElementById("backBtn");
+
+    function setSection(sectionName) {
+        // Highlight active button
+        document.querySelectorAll(".nav-btn").forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.section === sectionName);
+        });
+
+        // Back button only visible on sub pages (not About)
+        if (sectionName === "about") {
+            backBtn.classList.remove("visible");
+        } else {
+            backBtn.classList.add("visible");
+        }
+
+        const data = sectionData[sectionName];
+
+        if (!data) return;
+
+        summaryBody.textContent = data.summary || "";
+
+        if (sectionName === "newsletter") {
+            // Render a simple email form inside the content area
+            contentBody.innerHTML = `
+          <form class="newsletter-form">
+            <label for="email">Enter your email to receive news about Taniti:</label>
+            <input id="email" type="email" placeholder="name@example.com" />
+            <button type="button">Submit</button>
+          </form>
+        `;
+        } else {
+            contentBody.textContent = data.content || "";
+        }
+    }
+
+    // Attach click handlers
+    navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const section = btn.dataset.section;
+            setSection(section);
+        });
+    });
+
+    backBtn.addEventListener("click", () => {
+        setSection("about");
+    });
+
+    // Initialize default section
+    setSection("about");
+</script>
+</body>
+</html>
