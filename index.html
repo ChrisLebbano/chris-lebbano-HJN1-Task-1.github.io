@@ -215,6 +215,7 @@
             <button class="nav-btn" data-section="activities">Activities</button>
             <button class="nav-btn" data-section="dining">Dining</button>
             <button class="nav-btn" data-section="plan">Plan</button>
+            <button class="nav-btn" data-section="faqs">FAQs</button>
         </nav>
 
         <button class="newsletter-btn" data-section="newsletter">
@@ -299,7 +300,13 @@
         newsletter: {
             summary: "Simple newsletter sign-up form for visitors who want updates about Taniti.",
             content:
-                null // we'll build a small form in JS
+                null
+        },
+        faqs: {
+            summary: "Bullet pointed list of frequently asked questions about Taniti.",
+            content:
+                "Power outlets are 120 volts (the same as in the United States). \n" +
+                "Alcohol is not allowed to be served or sold between the hours of midnight and 9:00 a.m."
         }
     };
 
@@ -328,15 +335,22 @@
         summaryBody.textContent = data.summary || "";
 
         if (sectionName === "newsletter") {
-            // Render a simple email form inside the content area
             contentBody.innerHTML = `
-          <form class="newsletter-form">
-            <label for="email">Enter your email to receive news about Taniti:</label>
-            <input id="email" type="email" placeholder="name@example.com" />
-            <button type="button">Submit</button>
-          </form>
-        `;
-        } else {
+              <form class="newsletter-form">
+                <label for="email">Enter your email to receive news about Taniti:</label>
+                <input id="email" type="email" placeholder="name@example.com" />
+                <button type="button">Submit</button>
+              </form>
+            `;
+        } else if (sectionName === "faqs") {
+            contentBody.innerHTML = `
+              <ul>
+               <li>Power outlets are 120 volts (the same as in the United States).</li>
+               <li>Alcohol is not allowed to be served or sold between the hours of midnight and 9:00 a.m.</li>
+               <li>The drinking age on Taniti is 18 and the drinking age is not strictly enforced.</li>
+              </ul>
+            `;
+        }else {
             contentBody.textContent = data.content || "";
         }
     }
